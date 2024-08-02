@@ -1,26 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlgvmrk7o3pb0"]
+[gd_scene load_steps=5 format=3 uid="uid://dlgvmrk7o3pb0"]
 
 [ext_resource type="Script" path="res://scenes/Main/main.gd" id="1_3xn4u"]
-[ext_resource type="Texture2D" uid="uid://dfof1vaxu1tca" path="res://icon.svg" id="2_00uiu"]
+[ext_resource type="Texture2D" uid="uid://r34iaaa7uyqo" path="res://assets/sprite3.png" id="2_k485b"]
+[ext_resource type="Texture2D" uid="uid://brigoeqvqtsfh" path="res://assets/sprite2.png" id="3_0a0im"]
+[ext_resource type="Texture2D" uid="uid://ceagkxjjbub3v" path="res://assets/sprite1.png" id="3_o1wjx"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3xn4u")
 
 [node name="Sprite1" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
 position = Vector2(158, 58)
-texture = ExtResource("2_00uiu")
+texture = ExtResource("2_k485b")
 centered = false
 
 [node name="Sprite2" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 0, 1)
 position = Vector2(85, 150)
-texture = ExtResource("2_00uiu")
+texture = ExtResource("3_0a0im")
 offset = Vector2(100, 50)
 
 [node name="Sprite3" type="Sprite2D" parent="."]
-position = Vector2(113, 158)
-texture = ExtResource("2_00uiu")
+position = Vector2(121, 145)
+texture = ExtResource("3_o1wjx")
 
 [node name="Button" type="Button" parent="."]
 offset_left = 113.0
