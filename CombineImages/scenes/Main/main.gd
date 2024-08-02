@@ -16,7 +16,10 @@ func _draw() -> void:
 
 func get_sprite_rect(sprite: Sprite2D) -> Rect2:
     var rect := Rect2(sprite.position, sprite.get_rect().size)
-    rect.position -= rect.size / 2
+
+    if sprite.centered:
+        rect.position -= rect.size / 2
+
     return rect
 
 
