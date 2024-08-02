@@ -1,14 +1,10 @@
 extends Node2D
 
-@onready var sprite1: Sprite2D = $Sprite1
-@onready var sprite2: Sprite2D = $Sprite2
-@onready var sprite3: Sprite2D = $Sprite3
-
 var combined_sprite: Sprite2D = null
 
 
 func _draw() -> void:
-    draw_rect(calc_bounding_box([sprite1, sprite2, sprite3]), Color.LIGHT_BLUE, false, 10)
+    draw_rect(calc_bounding_box([$Sprite1, $Sprite2, $Sprite3]), Color.LIGHT_BLUE, false, 10)
 
     if combined_sprite:
         draw_rect(calc_bounding_box([combined_sprite]), Color.LIGHT_GREEN, false, 10)
@@ -34,17 +30,19 @@ func calc_bounding_box(sprites: Array[Sprite2D]) -> Rect2:
     return bounding_box
 
 
-func combine_images() -> void:
-    var format := sprite1.texture.get_image().get_format()
-    var bounding_box := calc_bounding_box([sprite1, sprite2, sprite3])
+func combine_images(sprites: Array[Sprite2D]) -> void:
+    assert(!sprites.is_empty())
 
-    assert(format == sprite2.texture.get_image().get_format() and format == sprite3.texture.get_image().get_format())
+    var format := sprites[0].texture.get_image().get_format()
+    var bounding_box := calc_bounding_box(sprites)
+
+    assert(sprites.all(func(sprite: Sprite2D) -> bool: return sprite.texture.get_image().get_format() == format))
     assert(bounding_box.size.x > 0 and bounding_box.size.y > 0)
 
     var image := Image.create(int(bounding_box.size.x), int(bounding_box.size.y), false, format)
-    image.blit_rect(sprite1.texture.get_image(), Rect2i(Vector2i.ZERO, sprite1.texture.get_image().get_size()), get_sprite_rect(sprite1).position - bounding_box.position)
-    image.blit_rect(sprite2.texture.get_image(), Rect2i(Vector2i.ZERO, sprite2.texture.get_image().get_size()), get_sprite_rect(sprite2).position - bounding_box.position)
-    image.blit_rect(sprite3.texture.get_image(), Rect2i(Vector2i.ZERO, sprite3.texture.get_image().get_size()), get_sprite_rect(sprite3).position - bounding_box.position)
+
+    for sprite in sprites:
+        image.blit_rect(sprite.texture.get_image(), Rect2i(Vector2i.ZERO, sprite.texture.get_image().get_size()), get_sprite_rect(sprite).position - bounding_box.position)
 
     var texture := ImageTexture.create_from_image(image)
 
@@ -58,5 +56,5 @@ func combine_images() -> void:
 
 
 func _on_button_pressed() -> void:
-    combine_images()
+    combine_images([$Sprite1, $Sprite2, $Sprite3])
     queue_redraw()
