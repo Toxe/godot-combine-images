@@ -42,7 +42,7 @@ func combine_images(sprites: Array[Sprite2D]) -> void:
     var image := Image.create(int(bounding_box.size.x), int(bounding_box.size.y), false, format)
 
     for sprite in sprites:
-        image.blit_rect(sprite.texture.get_image(), Rect2i(Vector2i.ZERO, sprite.texture.get_image().get_size()), get_sprite_rect(sprite).position - bounding_box.position)
+        image.blend_rect(sprite.texture.get_image(), Rect2i(Vector2i.ZERO, sprite.texture.get_image().get_size()), get_sprite_rect(sprite).position - bounding_box.position)
 
     var texture := ImageTexture.create_from_image(image)
 
