@@ -14,8 +14,9 @@ centered = false
 
 [node name="Sprite2" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0, 1)
-position = Vector2(161.5, 202)
+position = Vector2(85, 150)
 texture = ExtResource("2_00uiu")
+offset = Vector2(100, 50)
 
 [node name="Sprite3" type="Sprite2D" parent="."]
 position = Vector2(113, 158)
